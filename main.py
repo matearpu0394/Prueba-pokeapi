@@ -1,9 +1,10 @@
 from flask import Flask, jsonify
 import requests
 
+#Levantamiento de API
 app = Flask(__name__)
 
-#Pokemones por su tipo
+#Endpoint Listar pokemons por su tipo(fuego, agua, hierro...)
 
 @app.route("/pokemon/type/<name>", methods=["GET"])
 def pokemon_type(name):
@@ -16,7 +17,7 @@ def pokemon_type(name):
     else:
         return jsonify({"error": "Pokemon type not found"}), 404
 
-#Tipo de Pokemon por nombre
+#Endpoint Listar tipo de Pokemon por su nombre nombre
 
 @app.route("/pokemon/<string:name>")
 def get_pokemon_type(name):
@@ -28,6 +29,7 @@ def get_pokemon_type(name):
         return jsonify({"name": pokemon["name"], "types": types})
     else:
         return jsonify({"error": "Pokemon not found"}), 404
-
+    
+#Correr la aplicación por puerto 5000 con debug activado
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
